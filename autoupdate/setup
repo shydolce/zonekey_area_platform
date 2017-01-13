@@ -1,0 +1,11 @@
+#!/bin/bash
+#written by samson 9/12/2016
+path=$(pwd)
+sed -i 's@change@'''$path'''@g' crontab.sh
+sed -i 's@change@'''$path'''@g' conf/crontab.conf
+#crontab $path/conf/crontab.conf
+mysql -uroot -p123456 < sql/updatedb.sql
+chmod u+x autoupdate.sh
+chmod u+x crontab.sh
+
+

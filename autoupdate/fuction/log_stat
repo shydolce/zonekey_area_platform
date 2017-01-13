@@ -1,0 +1,32 @@
+#!/bin/bash
+
+log_stat(){
+case $1 in
+"")
+	continue
+	;;
+"noneed")
+	echo `date +%H:%M:%S` "无需更新" >> log/`date +%F`_update.log
+	;;
+"0")
+	echo `date +%H:%M:%S` "下载正常" >> log/`date +%F`_update.log
+	;;
+"3")
+	echo `date +%H:%M:%S` "I/O错误，检查存储" >> log/`date +%F`_update.log
+	;;
+"4")
+	echo `date +%H:%M:%S` "网络错误，无法连接升级服务器" >> log/`date +%F`_update.log
+	;;
+"5")
+	echo `date +%H:%M:%S` "SSL错误，检查连接证书" >> log/`date +%F`_update.log
+	;;
+"6")
+	echo `date +%H:%M:%S` "账号密码错误" >> log/`date +%F`_update.log
+	;;
+"8")
+	echo `date +%H:%M:%S` "找不到要下载的更新包" >> log/`date +%F`_update.log
+	;;
+*)
+	echo `date +%H:%M:%S` "未知错误" >> log/`date +%F`_update.log
+esac	
+}

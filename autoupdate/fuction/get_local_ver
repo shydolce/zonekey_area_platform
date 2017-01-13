@@ -1,0 +1,6 @@
+#!/bin/bash
+
+get_local_ver(){
+ local_ver=$(mysql -uroot -p123456 -h localhost updatedb -e "select ver from local_ver where name ='$1'" | sed -n '2p')
+}
+

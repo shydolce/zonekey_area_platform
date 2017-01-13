@@ -1,0 +1,18 @@
+#!/bin/bash
+
+download_package(){
+ ##download update package 
+ if [ $server_ver -gt $local_ver ] ; then 
+	package_server=$(mysql -uroot -p$passwd -h $host updatedb -e "select package from server_ver where name='$1'" | sed -n '2p')
+	if [ ! $package_server ] ; then 
+		sleep 1
+		echo "未能成功获取升级服务器中升级包信息" >> log/`date +%F`_update.log
+	else
+		wget -qc -t 5 -T 10 ftp://$host/$package_server --ftp-user=$user  --ftp-password=$wget_passwd -P packages/
+		wget_stat=`echo $?`
+	fi
+ else
+	wget_stat="noneed"
+	package_server=""
+ fi
+}

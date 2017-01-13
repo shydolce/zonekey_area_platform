@@ -1,0 +1,14 @@
+#!/bin/bash
+#written by samson 16/09/12
+
+update(){
+	unzip packages/$1 -d packages/
+	package_server=$(echo $1 | sed 's/\.zip//g')
+	#echo package_server
+	cd packages/$package_server
+	chmod u+x update.sh
+	./update.sh
+	cat update_$i.log | grep -v stat >> ../../log/`date +%F`_update.log
+	update_stat=$(cat update_$i.log | grep stat | awk -F'=' '{print $2}')
+	cd - &> /dev/null
+}

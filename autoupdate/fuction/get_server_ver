@@ -1,0 +1,6 @@
+#!/bin/bash
+
+get_server_ver(){
+ server_ver=$(mysql -uroot -p$passwd -h $1 updatedb -e "select ver from server_ver where name='$2'" | sed -n '2p')
+}
+

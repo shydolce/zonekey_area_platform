@@ -1,0 +1,2 @@
+cd change/
+./autoupdate.sh
